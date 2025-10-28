@@ -91,7 +91,7 @@ inline void HashTable<Key, Value>::PrintAtKey(const Key &key) const
 
     for (auto& pair : values_[index]) {
         if (pair.first == key) {
-            cout << pair.second < endl;
+            cout << pair.second << endl;
         }
     }
 }

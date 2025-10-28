@@ -72,13 +72,7 @@ AmazonItem::AmazonItem(string &input) {
     //Uniq Id,Product Name,Brand Name,Asin,Category,Upc Ean Code,List Price,Selling Price,Quantity,
     //Model Number,About Product,Product Specification,Technical Details,Shipping Weight,Product Dimensions,
     //Image,Variants,Sku,Product Url,Stock,Product Details,Dimensions,Color,Ingredients,Direction To Use,
-    //Is Amazon Seller,Size Quantity Variant,Product Description'\n'
-
-    // Example line:
-    // 3de177e1a695a48dbf706d14e587021f,"EVAN-MOOR 4545 Skill Sharpeners Math Book, Grade 1, 0.5"", Height, 8.5"", Width, 11"", Length",,,Toys & Games | Learning & Education | Counting & Math Toys,,,$12.64,,
-    // "","","","","","",
-    // https://images-na.ssl-images-amazon.com/images/I/51IXiB62htL.jpg|https://images-na.ssl-images-amazon.com/images/I/512zT9-GLVL.jpg|https://images-na.ssl-images-amazon.com/images/I/41XW0QwuymL.jpg,"",,https://www.amazon.com/EVAN-MOOR-Skill-Sharpeners-Height-Length/dp/B000NWII0E,,,,,,,
-    // Y,,\n
+    //Is Amazon Seller,Size Quantity Variant,Product Description
 
     string parser = input; // 3de177e1a695a48dbf706d14e587021f,"EVAN-MOOR 4545 Skill Sharpeners Math Book, Grade 1...
     string temp; // used for parsing the vector of categories and other more complex parsing processes
@@ -192,7 +186,7 @@ AmazonItem::AmazonItem(string &input) {
         this->model_num_ = parser.substr(0, parser.find(","));
     }
 
-    // About product
+    // About product (similar to product name)
     parser = parser.substr(parser.find(",") + 1);
     if (parser.find(",") == 0 || parser.find("\"\",") == 0) {
         temp = "NA";
@@ -386,7 +380,7 @@ AmazonItem::AmazonItem(string &input) {
 
 void AmazonItem::print() const
 {
-    cout << "ITEM DETAILS:\n------------------------------";
+    cout << "ITEM DETAILS:\n------------------------------\n";
     cout << "ID: " << id_ << endl;
     cout << "Product Name: " << product_name_ << endl;
     cout << "Brand Name: " << brand_name_ << endl;

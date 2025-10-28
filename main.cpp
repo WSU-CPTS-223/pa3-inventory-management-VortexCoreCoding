@@ -46,14 +46,22 @@ void evalCommand(string line, HashTable<string, AmazonItem>& id_table, HashTable
     else if (line.rfind("listInventory") == 0)
     {
         // Look up the appropriate datastructure to find all inventory belonging to a specific category
-        
+        string category = line.substr(line.find("ry") + 3);
+        const AmazonItem* target = cat_table.Find(category);
+        if (target == nullptr) {
+            cout << "Invalid Category" << endl;
+        }
+        else {
+            cout << "Items at category \"" << category << "\" :" << endl; 
+            cat_table.PrintAtKey(category);
+        }
     }
 }
 
 void fillIdTable(vector<AmazonItem>& items, HashTable<string, AmazonItem>& id_table)
 {
     for (auto& item : items) {
-        id_table.Insert(item.getId(), item); // inserts each item to the table, using id as the key
+        if (id_table.Insert(item.getId(), item)); // inserts each item to the table, using id as the key
     }
 }
 
