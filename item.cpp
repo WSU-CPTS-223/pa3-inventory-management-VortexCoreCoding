@@ -1,3 +1,12 @@
+/*
+* Class: Cpts 223
+* Professor: Subu Kandaswamy
+* Assignment: PA3
+* Due: 10/28/25
+* Programmer: Logan Spinali
+* Description: Items/Product cpp implementation (mostly constructors and parsing of input strings)
+*/
+
 #include "item.hpp"
 #include <iostream>
 

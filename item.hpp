@@ -1,3 +1,12 @@
+/*
+* Class: Cpts 223
+* Professor: Subu Kandaswamy
+* Assignment: PA3
+* Due: 10/28/25
+* Programmer: Logan Spinali
+* Description: Item/Product header file, also contains all the getters and setters that are necessry for sufficient access of its member variables
+*/
+
 #ifndef AMAZON_ITEM
 #define AMAZON_ITEM
 

@@ -1,9 +1,6 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/pAwGQi_N)
+Computer Science 223 - PA 3
+Logan Spinali
+10/28/25
 
-# PA4 Skeleton Code
-We expect a fully functioninig command line REPL application for an inventory querying system. Feel free to modify the skeleton code as you see fit.
-
-### How to run the current skeleton code
-`make` will compile and execute the skeleton code
-
-Feel free to modify Makefile as you see fit.
+1) My parsing process for the csv file was simply to load each section into the object, eliminating surrounding quotation marks and extraneous double quotations. For the categories, I decided to make a vector which contains all the categories for easier reading during the listInventory command implementation. For any csv value that was blank or just "", I put NA in the text slot.
+2) I created test cases for my custom HashTable Insert, Find, and Delete functions. For Insert, I created four cases: inserting at a position within the tablesize, inserting at a value larger than the table size, inserting a duplicate value, and inserting at a negative value. For Find, I created three cases: finding an item at the root of a list, finding an item at a non-root position on the same list, and trying to find a non-existent item. For Delete, I created four cases: deleting an existing item, deleting an item at a non-root position on a linked list, deleting an item that is not present in the table, and deleting the root of the list while confirming that the rest of the list stays intact.

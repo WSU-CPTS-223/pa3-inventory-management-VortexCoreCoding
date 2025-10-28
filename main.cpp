@@ -1,7 +1,17 @@
+/*
+* Class: Cpts 223
+* Professor: Subu Kandaswamy
+* Assignment: PA3
+* Due: 10/28/25
+* Programmer: Logan Spinali
+* Description: Runs a REPL program that allows for finding specific item ids and searching for what items fit specific categories
+*/
+
 #include <iostream>
 #include <string>
 #include <list>
 #include <fstream>
+#include <cassert>
 #include "hashtable.hpp"
 #include "item.hpp"
 
@@ -102,11 +112,64 @@ void bootStrap(HashTable<string, AmazonItem>& id_table, HashTable<string, Amazon
     fillCatTable(items, cat_table); // fills a hashtable categories as keys
 }
 
+// Testing Functions
+void testInsert() {
+    HashTable<int, string> table(25);
+
+    assert(table.Insert(5, "text")); // Simple case, inserting at position 5 should return true
+
+    assert(table.Insert(100, "text")); // Case 2, inserting a value larger than the table size, should result in 100%25 = position 0
+
+    assert(!table.Insert(5, "text")); // Case 3, inserting a duplicate item at the same key is not allowed, should return false
+
+    assert(table.Insert(-13, "negative")); // Case 4, inserting a negative key should return true (-13 % 25 = 12)
+
+    cout << "All Insertion Tests Passed" << endl;
+}
+
+void testFind() {
+    HashTable<int, string> table(25);
+    table.Insert(5, "text");
+    table.Insert(7, "text");
+    table.Insert(105, "text2"); // should be a different item at position 5 with key 105
+
+    assert(table.Find(5) != nullptr && *table.Find(5) == "text"); // Simple case, the string at position 5 should be "text"
+
+    assert(table.Find(105) != nullptr && *table.Find(105) == "text2"); // case 2, finding a string with key 105 should be "text2" in position 5
+
+    assert(table.Find(2) == nullptr); // case 3, finding a string with key 2 should not be possible because there is nothing in position 2
+
+    cout << "All Find Tests Passed" << endl;
+}
+
+void testDelete() {
+    HashTable<int, string> table(25);
+    table.Insert(5, "text");
+    table.Insert(7, "text");
+    table.Insert(105, "text2"); // should be a different item at position 5 with key 105
+    table.Insert(55, "text3"); // should be a different item at position 5 with key 55
+
+    assert(table.Delete(7)); // simple case, should return true because key 5 has "text" so a deletion should occur
+
+    assert(table.Delete(105)); // simple case 2, should return true because position 5 has text, text2, text3
+
+    assert(!table.Delete(8)); // case 3, should return false because nothing is at 8
+
+    assert(table.Delete(5) && table.Find(55) != nullptr); // simple case 4, should return true because text is at 5, and the list should still be intact
+
+    cout << "All Deletion Tests Passed" << endl;
+}
+
+
 int main(int argc, char const *argv[])
 {
+    testInsert();
+    testFind();
+    testDelete();
+
     string line;
     HashTable<string, AmazonItem> item_ids(2368); // based on the fact that each id is 32 chars, ranging from 0 to z, the max value is 3904, and min is 1536, so a table the size of max-min is all that is necessary
-    HashTable<string, AmazonItem> item_categories(50); // I'm not going to count the number of categories so I'll just guess 50
+    HashTable<string, AmazonItem> item_categories(100); // I'm not going to count the number of categories so I'll just guess
 
     bootStrap(item_ids, item_categories);
     while (getline(cin, line) && line != ":quit")

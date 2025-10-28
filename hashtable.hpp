@@ -1,3 +1,14 @@
+/*
+* Class: Cpts 223
+* Professor: Subu Kandaswamy
+* Assignment: PA3
+* Due: 10/28/25
+* Programmer: Logan Spinali
+* Description: Custom hash table implementation. Uses std::hash as a hash function.
+* Supports Insert, Find, and Delete in constant time.
+* Allows for duplicate keys so that the listInventory function can work in linear time.
+*/
+
 #ifndef HASH_TABLE
 #define HASH_TABLE
 
@@ -22,7 +33,7 @@ private:
 public:
     HashTable(int table_size = 1);
     bool Insert(const Key& key, const Value& value);
-    bool Delete(const Key& key, const Value& value);
+    bool Delete(const Key& key);
     const Value* Find(const Key& key) const;
     void PrintAtKey(const Key& key) const;
 };
@@ -53,7 +64,7 @@ inline bool HashTable<Key, Value>::Insert(const Key& key, const Value& value)
 }
 
 template <class Key, class Value>
-inline bool HashTable<Key, Value>::Delete(const Key& key, const Value& value)
+inline bool HashTable<Key, Value>::Delete(const Key& key)
 {
     std::hash<Key> hasher;
     size_t index = hasher(key) % table_size_;
